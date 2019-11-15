@@ -1,0 +1,19 @@
+trigger:
+- master
+
+pool:
+  # Images are defined here.
+  # Azure image documentation is located here at https://docs.microsoft.com/en-us/azure/devops/pipelines/process/container-phases
+  # Azure documentation to register your own container is located here at https://docs.microsoft.com/en-us/azure/container-registry/
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Bash@3
+  # Define environment variables here.
+  # We will assign the SECRET to the environment variable SRCCLR_API_TOKEN
+  env: {SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)}
+  inputs:
+    targetType: 'inline'
+    # Download, Excute and Finally scan it with our awesome tool!
+    script: 'curl -sSL https://download.sourceclear.com/ci.sh | bash -s – scan $(Build.SourcesDirectory)'
+
