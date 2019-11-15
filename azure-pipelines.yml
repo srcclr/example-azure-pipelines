@@ -17,3 +17,4 @@ steps:
     # Download, Excute and Finally scan it with our awesome tool!
     script: 'curl -sSL https://download.sourceclear.com/ci.sh | bash -s – scan $(Build.SourcesDirectory)'
 
+
